@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Contact.css';
+import contactImage1 from '../assets/contact/1.png';
+import contactImage2 from '../assets/contact/2.png';
 
 interface FormData {
   fullName: string;
@@ -88,17 +90,18 @@ const Contact: React.FC = () => {
 
   return (
     <section className="contact-section" id="contact">
-      <div className="contact-content">
-        <div className="contact-text">
-          <h2>Let's Connect</h2>
-          <p>Ready to bring your vision to life? Let's create something amazing together.</p>
+      <div className="contact-container">
+        <div className="contact-left">
+          <div className="contact-decorative">
+            <img src={contactImage1} alt="Contact decorative image" />
+          </div>
         </div>
-        <div className="contact-images">
-          <img src="/src/assets/contact/1.png" alt="Contact Illustration 1" className="contact-image" />
-          <img src="/src/assets/contact/2.png" alt="Contact Illustration 2" className="contact-image" />
-        </div>
-        <div className="contact-form">
-          <form onSubmit={handleSubmit}>
+        
+        <div className="contact-right">
+          <h2 className="contact-title">LET'S GET IN TOUCH</h2>
+          <a href="mailto:rohithgade0911@gmail.com" className="contact-email">rohithgade0911@gmail.com</a>
+          
+          <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-row">
               <div className="form-group half-width">
                 <input
