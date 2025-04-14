@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import '../styles/Hero.css';
-import heroImage from '../assets/pixar_3d.png';
 
 const Hero: React.FC = () => {
   const imageRef = useRef<HTMLImageElement>(null);
@@ -43,7 +42,7 @@ const Hero: React.FC = () => {
         </div>
         <img 
           ref={imageRef}
-          src={heroImage} 
+          src="/src/assets/pixar_3d.png"
           alt="3D Character" 
           className="hero-image" 
         />
