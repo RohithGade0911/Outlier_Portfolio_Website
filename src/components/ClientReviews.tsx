@@ -1,91 +1,119 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/ClientReviews.css';
-import reviewsData from '../data/client-reviews.json';
-
-// Import testimonial images
-import testimonial1 from '../assets/testimonials/1.png';
-import testimonial2 from '../assets/testimonials/2.png';
-import testimonial3 from '../assets/testimonials/3.png';
-import testimonial4 from '../assets/testimonials/4.png';
-import testimonial5 from '../assets/testimonials/5.png';
-import testimonial6 from '../assets/testimonials/6.png';
-import testimonial7 from '../assets/testimonials/7.png';
-
-interface Review {
-  id: number;
-  name: string;
-  company: string;
-  quote: string;
-  photo: string;
-}
 
 const ClientReviews: React.FC = () => {
   const leftColumnRef = useRef<HTMLDivElement>(null);
   const rightColumnRef = useRef<HTMLDivElement>(null);
+  const [leftColumnVisible, setLeftColumnVisible] = useState(false);
+  const [rightColumnVisible, setRightColumnVisible] = useState(false);
+  const [reviewsVisible, setReviewsVisible] = useState(false);
 
-  // Map of testimonial images
-  const testimonialImages = {
-    1: testimonial1,
-    2: testimonial2,
-    3: testimonial3,
-    4: testimonial4,
-    5: testimonial5,
-    6: testimonial6,
-    7: testimonial7,
-    8: testimonial1 // Reusing first image for the last review
-  };
+  const testimonials = [
+    { id: 1, image: '/src/assets/testimonials/1.png', name: 'John Doe', company: 'Tech Corp', quote: 'Amazing work! Really brought our vision to life.' },
+    { id: 2, image: '/src/assets/testimonials/2.png', name: 'Jane Smith', company: 'Design Studio', quote: 'Exceptional attention to detail and creativity.' },
+    { id: 3, image: '/src/assets/testimonials/3.png', name: 'Mike Johnson', company: 'Creative Agency', quote: 'A true professional with outstanding skills.' },
+    { id: 4, image: '/src/assets/testimonials/4.png', name: 'Sarah Brown', company: 'Marketing Firm', quote: 'Delivered beyond our expectations.' },
+    { id: 5, image: '/src/assets/testimonials/5.png', name: 'David Wilson', company: 'Startup Inc', quote: 'Innovative solutions and great communication.' },
+    { id: 6, image: '/src/assets/testimonials/6.png', name: 'Emily Davis', company: 'Media Group', quote: 'Highly recommend for any design project.' },
+    { id: 7, image: '/src/assets/testimonials/7.png', name: 'Alex Turner', company: 'Digital Solutions', quote: 'Outstanding work and professional service.' }
+  ];
 
-  // Split reviews into left and right columns with 4 cards each
-  const leftReviews = reviewsData.reviews.slice(0, 4);
-  const rightReviews = reviewsData.reviews.slice(4, 8);
-
-  // Create a continuous loop by adding the first card to the end of each set
-  const leftColumnReviews = [...leftReviews, leftReviews[0]];
-  const rightColumnReviews = [...rightReviews, rightReviews[0]];
-
-  // Log the number of reviews to verify
   useEffect(() => {
-    console.log('Left column reviews:', leftColumnReviews.length);
-    console.log('Right column reviews:', rightColumnReviews.length);
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target === leftColumnRef.current) {
+            setLeftColumnVisible(true);
+          } else if (entry.target === rightColumnRef.current) {
+            setRightColumnVisible(true);
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+    if (leftColumnRef.current) {
+      observer.observe(leftColumnRef.current);
+    }
+    if (rightColumnRef.current) {
+      observer.observe(rightColumnRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const reviewsSection = document.getElementById('reviews');
+      
+      if (reviewsSection) {
+        const sectionTop = reviewsSection.offsetTop;
+        const sectionHeight = reviewsSection.offsetHeight;
+        
+        // Calculate how far through the section we've scrolled (0 to 1)
+        const scrollProgress = Math.max(0, Math.min(1, 
+          (scrollPosition + windowHeight - sectionTop) / (sectionHeight + windowHeight)
+        ));
+        
+        setReviewsVisible(scrollProgress > 0.1);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    // Initial calculation
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
-    <section className="client-reviews-section" id="client-reviews">
-      <div className="client-reviews-container">
-        <h2 className="client-reviews-title client">CLIENT</h2>
-        <div className="reviews-column left-column" ref={leftColumnRef}>
-          {leftColumnReviews.map((review: Review, index: number) => (
-            <div key={`${review.id}-${index}`} className="review-card">
+    <section className="client-reviews-section" id="reviews">
+      <h2 className="client-reviews-title">Client Reviews</h2>
+      <div className="reviews-container">
+        <div 
+          className={`reviews-column left-column ${leftColumnVisible ? 'visible' : ''}`} 
+          ref={leftColumnRef}
+        >
+          {testimonials.slice(0, Math.ceil(testimonials.length / 2)).map(testimonial => (
+            <div key={testimonial.id} className={`review-card ${reviewsVisible ? 'visible' : ''}`}>
+              <img src={testimonial.image} alt={testimonial.name} className="reviewer-image" />
               <div className="review-content">
-                <div className="review-photo">
-                  <img src={testimonialImages[review.id as keyof typeof testimonialImages]} alt={review.name} loading="lazy" />
-                </div>
-                <p className="review-quote">"{review.quote}"</p>
-              </div>
-              <div className="review-author">
-                <div className="review-name">{review.name}</div>
-                <div className="review-company">{review.company}</div>
+                <h3>{testimonial.name}</h3>
+                <p className="company">{testimonial.company}</p>
+                <p className="quote">{testimonial.quote}</p>
               </div>
             </div>
           ))}
         </div>
-        <div className="reviews-column right-column" ref={rightColumnRef}>
-          {rightColumnReviews.map((review: Review, index: number) => (
-            <div key={`${review.id}-${index}`} className="review-card">
+        <div 
+          className={`reviews-column right-column ${rightColumnVisible ? 'visible' : ''}`} 
+          ref={rightColumnRef}
+        >
+          {testimonials.slice(Math.ceil(testimonials.length / 2)).map(testimonial => (
+            <div key={testimonial.id} className={`review-card ${reviewsVisible ? 'visible' : ''}`}>
+              <img src={testimonial.image} alt={testimonial.name} className="reviewer-image" />
               <div className="review-content">
-                <div className="review-photo">
-                  <img src={testimonialImages[review.id as keyof typeof testimonialImages]} alt={review.name} loading="lazy" />
-                </div>
-                <p className="review-quote">"{review.quote}"</p>
-              </div>
-              <div className="review-author">
-                <div className="review-name">{review.name}</div>
-                <div className="review-company">{review.company}</div>
+                <h3>{testimonial.name}</h3>
+                <p className="company">{testimonial.company}</p>
+                <p className="quote">{testimonial.quote}</p>
               </div>
             </div>
           ))}
         </div>
-        <h2 className="client-reviews-title reviews">REVIEWS</h2>
       </div>
     </section>
   );
