@@ -20,7 +20,7 @@ interface PortfolioItem {
   title: string;
 }
 
-const SampleWork: React.FC = () => {
+const Portfolio: React.FC = () => {
   const grid1Ref = useRef<HTMLDivElement>(null);
   const grid2Ref = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -43,6 +43,16 @@ const SampleWork: React.FC = () => {
     { id: 10, image: gallery10, title: '3D 10' },
     { id: 11, image: gallery11, title: '3D  Project 11' },
     { id: 12, image: gallery12, title: 'Design Project 12' }
+  ];
+
+  const galleryImages = [
+    { src: '/src/assets/gallery/1.png', alt: 'Gallery Image 1' },
+    { src: '/src/assets/gallery/2.png', alt: 'Gallery Image 2' },
+    { src: '/src/assets/gallery/5.png', alt: 'Gallery Image 5' },
+    { src: '/src/assets/gallery/7.png', alt: 'Gallery Image 7' },
+    { src: '/src/assets/gallery/9.png', alt: 'Gallery Image 9' },
+    { src: '/src/assets/gallery/10.png', alt: 'Gallery Image 10' },
+    { src: '/src/assets/gallery/12.png', alt: 'Gallery Image 12' }
   ];
 
   useEffect(() => {
@@ -145,7 +155,7 @@ const SampleWork: React.FC = () => {
 
   return (
     <section className="portfolio-section" id="portfolio" ref={sectionRef}>
-      <h2 className="section-title"></h2>
+      <h2 className="section-title">Portfolio</h2>
       <div className="portfolio-container">
         <div className="portfolio-grid left-to-right" ref={grid1Ref}>
           {portfolioItems.map(renderPortfolioItem)}
@@ -154,8 +164,15 @@ const SampleWork: React.FC = () => {
           {portfolioItems2.map(renderPortfolioItem)}
         </div>
       </div>
+      <div className="gallery-grid">
+        {galleryImages.map((image, index) => (
+          <div key={index} className={`gallery-item item-${index + 1}`}>
+            <img src={image.src} alt={image.alt} loading="lazy" />
+          </div>
+        ))}
+      </div>
     </section>
   );
 };
 
-export default SampleWork; 
+export default Portfolio; 

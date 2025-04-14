@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/About.css';
-import aboutImage1 from '../assets/about/image1.png';
-import aboutImage2 from '../assets/about/image2.png';
-import aboutImage3 from '../assets/about/image3.png';
-import aboutImage4 from '../assets/about/image4.png';
 
 const About: React.FC = () => {
   const leftElementsRef = useRef<HTMLDivElement>(null);
@@ -16,6 +12,13 @@ const About: React.FC = () => {
   const [buttonVisible, setButtonVisible] = useState(false);
   const [decorativeElementsVisible, setDecorativeElementsVisible] = useState(false);
   const [sectionInView, setSectionInView] = useState(false);
+
+  const images = [
+    { src: '/src/assets/about/image1.png', alt: 'About Image 1' },
+    { src: '/src/assets/about/image2.png', alt: 'About Image 2' },
+    { src: '/src/assets/about/image3.png', alt: 'About Image 3' },
+    { src: '/src/assets/about/image4.png', alt: 'About Image 4' }
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,7 +112,7 @@ const About: React.FC = () => {
             I partner with bold brands to craft striking, story-driven visuals.
             </p>
             <p className={textLinesRevealed[3] ? 'revealed' : ''}>
-            Let’s design what makes you unforgettable.
+            Let's design what makes you unforgettable.
             </p>
           </div>
           <button className={`contact-button ${buttonVisible ? 'visible' : ''}`}>
@@ -119,11 +122,24 @@ const About: React.FC = () => {
         
         <div className={`decorative-elements ${decorativeElementsVisible ? 'visible' : ''}`}>
           <div className="left-elements" ref={leftElementsRef}>
-            <img src={aboutImage1} alt="Decorative element" className="decorative-element top-left" />
+            {images.map((image, index) => (
+              <img
+                key={index}
+                src={image.src}
+                alt={image.alt}
+                className={`decorative-element top-left about-image about-image-${index + 1}`}
+              />
+            ))}
           </div>
           <div className="right-elements" ref={rightElementsRef}>
-            <img src={aboutImage3} alt="Decorative element" className="decorative-element top-right" />
-            <img src={aboutImage4} alt="Decorative element" className="decorative-element bottom-right" />
+            {images.map((image, index) => (
+              <img
+                key={index}
+                src={image.src}
+                alt={image.alt}
+                className={`decorative-element top-right about-image about-image-${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>
