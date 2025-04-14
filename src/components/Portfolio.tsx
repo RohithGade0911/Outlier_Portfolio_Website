@@ -1,18 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Portfolio.css';
-// Import gallery images
-import gallery1 from '../assets/gallery/1.png';
-import gallery2 from '../assets/gallery/2.png';
-import gallery3 from '../assets/gallery/3.jpg';
-import gallery4 from '../assets/gallery/4.jpg';
-import gallery5 from '../assets/gallery/5.png';
-import gallery6 from '../assets/gallery/6.jpg';
-import gallery7 from '../assets/gallery/7.png';
-import gallery8 from '../assets/gallery/8.jpg';
-import gallery9 from '../assets/gallery/9.png';
-import gallery10 from '../assets/gallery/10.png';
-import gallery11 from '../assets/gallery/11.jpg';
-import gallery12 from '../assets/gallery/12.png';
 
 interface PortfolioItem {
   id: number;
@@ -28,21 +15,21 @@ const Portfolio: React.FC = () => {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
 
   const portfolioItems: PortfolioItem[] = [
-    { id: 1, image: gallery1, title: '3D Design Project 1' },
-    { id: 2, image: gallery2, title: 'Design Project 2' },
-    { id: 3, image: gallery3, title: 'Project 3' },
-    { id: 4, image: gallery4, title: '3D Design 4' },
-    { id: 5, image: gallery5, title: '3D Project 5' },
-    { id: 6, image: gallery6, title: 'Design Project 6' }
+    { id: 1, image: '/src/assets/gallery/1.png', title: '3D Design Project 1' },
+    { id: 2, image: '/src/assets/gallery/2.png', title: 'Design Project 2' },
+    { id: 3, image: '/src/assets/gallery/3.jpg', title: 'Project 3' },
+    { id: 4, image: '/src/assets/gallery/4.jpg', title: '3D Design 4' },
+    { id: 5, image: '/src/assets/gallery/5.png', title: '3D Project 5' },
+    { id: 6, image: '/src/assets/gallery/6.jpg', title: 'Design Project 6' }
   ];
 
   const portfolioItems2: PortfolioItem[] = [
-    { id: 7, image: gallery7, title: '3D Design 7' },
-    { id: 8, image: gallery8, title: '3D Project 8' },
-    { id: 9, image: gallery9, title: 'Design Project 9' },
-    { id: 10, image: gallery10, title: '3D 10' },
-    { id: 11, image: gallery11, title: '3D  Project 11' },
-    { id: 12, image: gallery12, title: 'Design Project 12' }
+    { id: 7, image: '/src/assets/gallery/7.png', title: '3D Design 7' },
+    { id: 8, image: '/src/assets/gallery/8.jpg', title: '3D Project 8' },
+    { id: 9, image: '/src/assets/gallery/9.png', title: 'Design Project 9' },
+    { id: 10, image: '/src/assets/gallery/10.png', title: '3D 10' },
+    { id: 11, image: '/src/assets/gallery/11.jpg', title: '3D  Project 11' },
+    { id: 12, image: '/src/assets/gallery/12.png', title: 'Design Project 12' }
   ];
 
   const galleryImages = [
