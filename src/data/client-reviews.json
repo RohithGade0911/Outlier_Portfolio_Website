@@ -1,0 +1,60 @@
+{
+  "reviews": [
+    {
+      "id": 1,
+      "name": "DR. AMANDA K.",
+      "company": "MEDTECH VISUALS",
+      "quote": "Rohith designed a beautiful visual guide for our medical kit, and the clarity was impressive. The layouts were clean, intuitive, and extremely helpful for our trainees. We're beyond satisfied.",
+      "photo": "../assets/testimonials/1.png"
+    },
+    {
+      "id": 2,
+      "name": "MICHAEL T.",
+      "company": "PROTOSPHERE INNOVATIONS",
+      "quote": "Roh brought our branding to life with a stunning presentation deck. The visuals were sharp and persuasive, which played a big part in winning over investors. Totally recommend their work!",
+      "photo": "../assets/testimonials/2.png"
+    },
+    {
+      "id": 3,
+      "name": "RACHEL M.",
+      "company": "METAFORM CREATIONS",
+      "quote": "Rohith's design style made our NFT brand shine. The visuals were eye-catching, and the whole project felt smooth thanks to their creativity and clear communication. Can't wait to team up again!",
+      "photo": "../assets/testimonials/3.png"
+    },
+    {
+      "id": 4,
+      "name": "JENNIFER R.",
+      "company": "DIGITAL FRONTIER",
+      "quote": "Rohith's design instincts are amazing. They created graphics that not only captured our brand perfectly but also made our online presence look polished and unique.",
+      "photo": "../assets/testimonials/4.png"
+    },
+    {
+      "id": 5,
+      "name": "CHRIS B.",
+      "company": "REALMFORGE STUDIOS",
+      "quote": "The graphic assets Roh delivered for our game were top-notch. Every icon, banner, and element reflected the game's vibe perfectly. They nailed the style we were after!",
+      "photo": "../assets/testimonials/5.png"
+    },
+    {
+      "id": 6,
+      "name": "DAVID L.",
+      "company": "VR INNOVATIONS",
+      "quote": "Rohith's visuals for our VR campaign were fantastic. Their style gave our promo materials a modern edge and helped us deliver a truly immersive and engaging preview. A+ design work!",
+      "photo": "../assets/testimonials/6.png"
+    },
+    {
+      "id": 7,
+      "name": "THOMAS W.",
+      "company": "ARCHITECTURAL VISION",
+      "quote": "Collaborating with Roh on our branding visuals was inspiring. The designs gave our proposals a professional edge and helped clients envision the project more clearly from day one.",
+      "photo": "../assets/testimonials/7.png"
+    },
+    {
+      "id": 8,
+      "name": "SARAH M.",
+      "company": "CREATIVE STUDIO",
+      "quote": "Rohith's designs elevated our campaign instantly. Their sense of color and balance turned basic ideas into attention-grabbing visuals that our audience loved and remembered.",
+      "photo": "../assets/testimonials/1.png"
+    }
+  ]
+}
